@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>satrio terminal landing page</title>
+    <style>
+      /* Base styles for larger screens (Laptop and Desktop) */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #007bff;
+        color: white;
+        height: 1000px;
+        position: relative;
+      }
+
+      .navbar {
+        background: url(navbar.jpg);
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar h1 {
+        margin: 0;
+        color: black;
+        text-decoration: none;
+        font-size: 30px;
+        font-family: "VCR OSD Mono", monospace;
+        cursor: pointer;
+      }
+
+      .navbar a {
+        margin: 0;
+        color: black;
+        text-decoration: none;
+        font-size: 24px;
+        font-family: sans-serif;
+        cursor: pointer;
+      }
+
+      .content {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .news-container {
+        background-color: transparent;
+        color: white;
+        width: 80%;
+        max-width: 1200px;
+        padding: 20px;
+      }
+
+      .news-article {
+        background-color: rgba(0, 255, 255, 0.3);
+        color: black;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: Helvetica, sans-serif;
+        font-size: 14px;
+        border: 3px solid #5a3e2b;
+        background-image: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0.1)
+        );
+      }
+
+      .news-logo {
+        width: 50px;
+        height: 50px;
+        background-color: gray;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .text-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .news-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .news-summary {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .news-date {
+        font-size: 0.9rem;
+        color: gray;
+        margin: 0;
+        text-align: right;
+      }
+
+      .background-layer {
+        position: absolute;
+        width: 100%;
+        z-index: 0;
+      }
+
+      .background-content {
+        top: 0;
+        height: 70%;
+        background: url("background-top.jpeg") no-repeat center center;
+        background-size: cover;
+      }
+
+      .background-bottom {
+        bottom: 0;
+        height: 30%;
+        background: url("background-bottom.jpeg") no-repeat center center;
+        background-size: cover;
+        background-blend-mode: soft-light;
+      }
+
+      #bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        z-index: 10;
+      }
+
+      /* Sliding Menu */
+      .about-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Start hidden */
+        width: 300px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 40px;
+        z-index: 1001;
+        transition: right 0.5s ease;
+        overflow-y: auto;
+      }
+
+      .about-menu h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .about-menu p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+
+      .about-menu img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .about-menu .close-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Open the sliding menu */
+      .about-menu.open {
+        right: 0;
+      }
+
+      /* CTA (Call to Action) Style */
+      .cta {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #ff7e00;
+        cursor: pointer;
+        text-decoration: underline;
+        text-align: left;
+      }
+
+      .cta:hover {
+        color: #ff5722;
+      }
+
+      .about-section {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 40px;
+        margin-top: 20px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      .about-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .about-section p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+
+      /* Media Queries for Mobile and Laptop */
+
+      /* Mobile devices (max-width: 600px) */
+      @media screen and (max-width: 600px) {
+        /* Navbar */
+        .navbar h1 {
+          font-size: 30px;
+        }
+
+        .navbar a {
+          font-size: 24px;
+        }
+
+        /* Content Layout */
+        .content {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .news-container {
+          width: 100%;
+          padding: 10px;
+        }
+
+        /* News Article */
+        .news-article {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px;
+        }
+
+        .news-logo {
+          width: 40px;
+          height: 40px;
+        }
+
+        .news-title {
+          font-size: 1rem;
+        }
+
+        .news-summary {
+          font-size: 0.9rem;
+        }
+
+        .cta {
+          font-size: 0.9rem;
+        }
+
+        /* About Menu */
+        .about-menu {
+          width: 100%;
+          padding: 20px;
+        }
+      }
+
+      /* Laptop devices (min-width: 1025px and max-width: 1440px) */
+      @media screen and (min-width: 1025px) and (max-width: 1440px) {
+        /* Navbar */
+        .navbar h1 {
+          font-size: 24px;
+        }
+
+        .navbar a {
+          font-size: 20px;
+        }
+
+        /* Content Layout */
+        .content {
+          flex-direction: row;
+          padding: 20px;
+        }
+
+        .news-container {
+          width: 80%;
+          padding: 20px;
+        }
+
+        /* News Article */
+        .news-article {
+          flex-direction: row;
+          align-items: center;
+          padding: 15px;
+        }
+
+        .news-logo {
+          width: 50px;
+          height: 50px;
+        }
+
+        .news-title {
+          font-size: 1.2rem;
+        }
+
+        .news-summary {
+          font-size: 1rem;
+        }
+
+        .cta {
+          font-size: 1rem;
+        }
+
+        /* About Menu */
+        .about-menu {
+          width: 350px;
+          padding: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-layer background-content"></div>
+    <div class="background-layer background-bottom"></div>
+
+    <div class="navbar">
+      <h1 onclick="scrollToTop()">SATRIO TERMINAL</h1>
+      <a href="javascript:void(0);" onclick="toggleMenu()">About Me</a>
+    </div>
+
+    <div class="content">
+      <div class="news-container">
+        <!-- News Articles -->
+        <div class="news-article">
+          <img class="news-logo" src="logo3.jpeg" alt="Logo" />
+          <div class="text-content">
+            <h2 class="news-title">satrio.orgz</h2>
+            <p class="news-summary">
+              This account focuses on my organization activity.
+            </p>
+            <p
+              class="cta"
+              alt="klik untuk melihat akun instagram saya"
+              onclick="window.location.href='https://www.instagram.com/satrio.orgz'"
+            >
+              Klik untuk melihat akun Instagram saya
+            </p>
+          </div>
+        </div>
+        <div class="news-article">
+          <img class="news-logo" src="logo1.jpeg" alt="Logo" />
+          <div class="text-content">
+            <h2 class="news-title">satrio.nature</h2>
+            <p class="news-summary">
+              This account focuses on my nature photography.
+            </p>
+            <p
+              class="cta"
+              alt="klik untuk melihat akun instagram saya"
+              onclick="window.location.href='https://www.instagram.com/satrio.nature'"
+            >
+              Klik untuk melihat akun Instagram saya
+            </p>
+          </div>
+        </div>
+        <div class="news-article">
+          <img class="news-logo" src="logo4.jpeg" alt="Logo" />
+          <div class="text-content">
+            <h2 class="news-title">satrio.instru</h2>
+            <p class="news-summary">
+              This account focuses on my digital tech life.
+            </p>
+            <p
+              class="cta"
+              alt="klik untuk melihat akun instagram saya"
+              onclick="window.location.href='https://www.instagram.com/satrio.instru'"
+            >
+              Klik untuk melihat akun Instagram saya
+            </p>
+          </div>
+        </div>
+        <div class="news-article">
+          <img class="news-logo" src="logo2.jpeg" alt="Logo" />
+          <div class="text-content">
+            <h2 class="news-title">satrio.otaku</h2>
+            <p class="news-summary">
+              This account focuses on my wibu nolep (no life) and 2D waifu dump.
+            </p>
+            <p
+              class="cta"
+              alt="klik untuk melihat akun instagram saya"
+              onclick="window.location.href='https://www.instagram.com/satrio.otaku'"
+            >
+              Klik untuk melihat akun Instagram saya
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Menu -->
+    <div class="about-menu" id="aboutMenu">
+      <button class="close-btn" onclick="toggleMenu()">X</button>
+      <h2>About Us</h2>
+      <p>
+        saya satrio,seorang mahasiswa semseter 3 fisika angkatan 23 universitas
+        lampung yang hobi dibidang technology dan photography. saya membuat
+        beberapa akun instagram yang relevan dengan hobi saya, jadi saya membuat
+        page ini untuk memudahkan anda menemukan akun instagram saya, yang
+        berjumlah 4 akun sesuai dengan list yang saya buat.
+      </p>
+      <img src="about-background.png" alt="About Background" />
+    </div>
+
+    <div id="bottom">End</div>
+
+    <script>
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function toggleMenu() {
+        document.getElementById("aboutMenu").classList.toggle("open");
+      }
+    </script>
+  </body>
+</html>
